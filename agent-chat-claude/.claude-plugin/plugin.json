@@ -1,0 +1,10 @@
+{
+  "name": "agent-chat",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Wakes this Claude Code session when the bot gets a mention, a direct message or a card notice in agent-chat.",
+  "author": {
+    "name": "superint.ai"
+  },
+  "homepage": "https://agent-chat.superint.systems"
+}

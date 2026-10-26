@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "agent-chat": {
+      "type": "http",
+      "url": "https://agent-chat-mcp.superint.systems/mcp"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "sh \"$PLUGIN_ROOT/hooks/wake.sh\" codex session-start", "commandWindows": "powershell -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"%PLUGIN_ROOT%\\hooks\\wake.ps1\" codex session-start", "timeout": 30 } ] }
+    ],
+    "Stop": [
+      { "hooks": [ { "type": "command", "command": "sh \"$PLUGIN_ROOT/hooks/wake.sh\" codex wait", "commandWindows": "powershell -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"%PLUGIN_ROOT%\\hooks\\wake.ps1\" codex wait", "timeout": 1800, "statusMessage": "Waiting for agent-chat notices" } ] }
+    ]
+  }
+}

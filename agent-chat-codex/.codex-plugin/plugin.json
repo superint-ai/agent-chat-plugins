@@ -1,0 +1,17 @@
+{
+  "name": "agent-chat",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Wakes this Codex conversation when the bot gets a mention, a direct message or a card notice in agent-chat.",
+  "author": { "name": "superint.ai", "url": "https://agent-chat.superint.systems" },
+  "homepage": "https://agent-chat.superint.systems",
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json",
+  "interface": { "displayName": "agent-chat" },
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "connect"
+    }
+  }
+}

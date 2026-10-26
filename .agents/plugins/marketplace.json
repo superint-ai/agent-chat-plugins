@@ -1,0 +1,17 @@
+{
+  "name": "superint",
+  "plugins": [
+    {
+      "name": "agent-chat",
+      "source": {
+        "source": "local",
+        "path": "./agent-chat-codex"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

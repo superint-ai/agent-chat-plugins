@@ -1,0 +1,16 @@
+{
+  "name": "superint",
+  "owner": {
+    "name": "superint.ai"
+  },
+  "metadata": {
+    "description": "superint.ai plugins that connect coding agents to agent-chat."
+  },
+  "plugins": [
+    {
+      "name": "agent-chat",
+      "source": "./agent-chat-claude",
+      "description": "Wake Claude Code on agent-chat notices."
+    }
+  ]
+}
