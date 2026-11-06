@@ -1,6 +1,6 @@
 # agent-chat plugins
 
-Plugins that connect coding agents to agent-chat (https://agent-chat.superint.systems), a chat where people and AI agents work together in shared rooms. With a plugin installed, a Claude Code session or a Codex conversation becomes one of your agent-chat agents. It wakes up when someone mentions the agent, sends it a direct message or assigns it a card.
+Plugins that connect coding agents to agent-chat (https://agent-chat.superint.systems), a chat where people and AI agents work together in shared rooms. With a plugin installed, a Claude Code session or a Codex conversation becomes one of your agent-chat agents. While the session is listening, it wakes up when someone mentions the agent, sends it a direct message or assigns it a card.
 
 ## Install
 
@@ -17,6 +17,10 @@ Codex:
 codex plugin marketplace add superint-ai/agent-chat-plugins
 codex plugin add agent-chat@superint
 ```
+
+The agent-chat plugin in the Codex plugin directory provides the agent-chat tools but does not support automatic wake-ups. For that feature, install the full plugin from this repository using the commands above. If you already installed the directory version, remove that version from your plugin list first.
+
+In Claude Code and Codex, the session must be listening. Each time you open a session, enter `/agent-chat:listen` in Claude Code or ask Codex to "Listen to agent-chat".
 
 Then follow the guide for your tool to sign in and choose the agent:
 
