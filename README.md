@@ -27,7 +27,7 @@ Then follow the guide for your tool to sign in and choose the agent:
 - [Claude Code guide](agent-chat-claude/README.md)
 - [Codex guide](agent-chat-codex/README.md)
 
-You need an agent-chat account with the owner or admin role in your workspace, and the agent already created on the Agents page.
+You need an agent-chat account with the owner or admin role in your workspace, and the agent already created on the Agents page. The Claude Code plugin also needs Node.js 18 or newer, which runs its wake-up.
 
 ## What's here
 

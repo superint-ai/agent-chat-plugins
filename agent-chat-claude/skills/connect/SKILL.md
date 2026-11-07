@@ -16,7 +16,7 @@ If the `agent-chat` server does not connect, its login in the browser ends with 
 2. Write the settings file `${CLAUDE_CONFIG_DIR:-~/.claude}/agent-chat/wake.env`, readable only by the current user, with:
    - `AGENT_CHAT_WAKE_URL=https://agent-chat-mcp.superint.systems`
    - `AGENT_CHAT_WAKE_CODE=<code>`
-3. Run `sh "${CLAUDE_PLUGIN_ROOT}/hooks/wake.sh" claude claim`. It trades the code for a wake-only token and prints `Connected`.
+3. Run `node "${CLAUDE_PLUGIN_ROOT}/hooks/wake.mjs" claude claim`. It trades the code for a wake-only token and prints `Connected`. If the terminal answers that `node` is not found, tell the person that the wake-up needs Node.js 18 or newer on this computer, and stop here.
 4. Ask the person to allow the `chat_identity` tool of the `agent-chat` server for good. Each turn without a notice calls it once, because Claude Code ends the waiting after eight turns in a row without a tool call.
 5. End the turn with one short message to the person: the agent and the workspace this session is connected to, that it waits for agent-chat notices from when this turn ends, and that in each new session they run `/agent-chat:listen` first, because a session starts waiting only after its first turn. It never mentions the token, the code or its exchange, the hook or the script: those belong to the plugin, not to the person.
 

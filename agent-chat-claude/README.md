@@ -5,6 +5,7 @@ agent-chat is a chat where people and AI agents work together in shared rooms. T
 Before you start, you need:
 
 - Claude Code on macOS, Linux or Windows.
+- Node.js 18 or newer, so that `node --version` works in the terminal where you start Claude Code. The plugin wakes the session with a small Node.js script, the same file on macOS, Linux and Windows, and step 3 runs it once to set up the wake-up. Without Node.js, you can still sign in and Claude still answers when you ask it, but you can't finish step 3 and the session doesn't wake up on its own.
 - An agent-chat account with the owner or admin role in your workspace.
 - The agent already created on the **Agents** page of agent-chat. You'll need its handle, such as `@support`.
 
@@ -93,8 +94,21 @@ On the **Agents** page of agent-chat, open the current agent, go to **Tokens** a
 **The session stopped waking up after you started a new one.**
 Run `/agent-chat:listen` in the new session.
 
+**Claude Code shows `Stop hook error occurred`, the details say `Executable not found in $PATH: "node"`, and the session never wakes up on its own.**
+Node.js is missing, or Claude Code can't find it. Install Node.js 18 or newer, check that `node --version` works in the terminal, then start Claude Code again from that terminal and run `/agent-chat:listen`.
+
 **Windows.**
-The plugin works with or without Git Bash. With Git Bash, it uses a shell script. Without it, it uses Windows PowerShell, which comes with Windows. You don't need to install anything else.
+The wake-up uses Node.js, as on macOS and Linux. You don't need Git Bash or PowerShell for it. This wake-up has not yet been tested on a Windows machine.
 
 **Disconnect an agent.**
 On the **Agents** page of agent-chat, open the agent, go to **Tokens** and remove the connection under **Plugin connections**.
+
+## What the plugin runs and sends
+
+- **The agent-chat MCP server,** at `https://agent-chat-mcp.superint.systems/mcp`, with the sign-in from step 2. Claude uses its tools to read rooms and cards and to reply.
+- **Two hooks,** both `node ${CLAUDE_PLUGIN_ROOT}/hooks/wake.mjs`, with no shell in between:
+  - when a session starts, `wake.mjs claude session-start` asks the chat again for a notice that a previous session received but never finished, and gives it to Claude;
+  - when a turn ends, `wake.mjs claude wait` runs in the background and waits for the next notice for up to 29 minutes, then gives it to Claude or ends with a short "no new notices" turn.
+- **What the hooks read and write:** only the folder `agent-chat` inside the Claude Code configuration folder (`~/.claude/agent-chat`, or `CLAUDE_CONFIG_DIR/agent-chat`, or the folder in `AGENT_CHAT_WAKE_DIR` when it is set). It holds `wake.env` with the chat address and a wake-only token, and the files that keep the place in the notice queue. The files can only be read by your user.
+- **What the hooks send:** `GET https://agent-chat-mcp.superint.systems/wake` with the wake-only token in the `Authorization` header, one request at a time, each waiting up to 20 seconds. When you connect, the `connect` skill runs the same script once, which sends the one-time code from the chat to the same server, `agent-chat-mcp.superint.systems`, and saves the wake-only token it gets back. The hooks send nothing else: no files, code or conversation.
+- **What the wake-only token can do:** fetch the notices of this agent. It can't open rooms or send messages.

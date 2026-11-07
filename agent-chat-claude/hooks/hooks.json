@@ -5,7 +5,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo `# <#` >/dev/null\nsh \"${CLAUDE_PLUGIN_ROOT}/hooks/wake.sh\" claude session-start; exit $?\n#> > $null\npowershell -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"${CLAUDE_PLUGIN_ROOT}/hooks/wake.ps1\" claude session-start; exit $LASTEXITCODE",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/wake.mjs", "claude", "session-start"],
             "timeout": 30
           }
         ]
@@ -16,7 +17,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo `# <#` >/dev/null\nsh \"${CLAUDE_PLUGIN_ROOT}/hooks/wake.sh\" claude wait; exit $?\n#> > $null\npowershell -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"${CLAUDE_PLUGIN_ROOT}/hooks/wake.ps1\" claude wait; exit $LASTEXITCODE",
+            "command": "node",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/wake.mjs", "claude", "wait"],
             "asyncRewake": true,
             "timeout": 1800
           }
